@@ -1,0 +1,33 @@
+{
+  "erro": {
+    "userKey": "email",
+    "userValidation": "birthdate",
+    "duplicateKeys": [
+      [
+        {
+          "name": "JULIA VALERIANO DE LIRA MOURA",
+          "status": true,
+          "serial_number": "8284",
+          "email": "julia.moura@mca.srv.br",
+          "job_description": "ENGENHEIRO DE PROJETOS PLENO I",
+          "department": "MOSAIC GERENCIAMENTO",
+          "birthdate": "1996-03-06",
+          "cod_area": "20050001"
+        },
+        {
+          "name": "FRANCIMAR COSTA BALDEZ ",
+          "status": false,
+          "serial_number": "8284",
+          "email": "julia.moura@mca.srv.br",
+          "job_description": "TECNICO ELETROMECÂNICO MASTER",
+          "department": "VALE PORTO NORTE",
+          "birthdate": "1997-02-23",
+          "cod_area": "20048801"
+        }
+      ]
+    ],
+    "invalidKeys": [],
+    "invalidFields": []
+  },
+  "DataEHora": "24/01/2024, 18:01:25"
+}
