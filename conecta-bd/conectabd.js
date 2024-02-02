@@ -2,7 +2,7 @@ const oracledb = require('oracledb');
 const fs = require('fs')
 
 const connectionConfig = {
-  user: 'teste',
+  user: 'sankhya',
   password: 'tecsis',
   connectString: '10.140.4.3:1521/snkdbprd'
 };
@@ -12,7 +12,7 @@ async function conectaEBusca() {
     // Estabelecer a conexão
     const connection = await oracledb.getConnection(connectionConfig);
     const sql = `
-    SELECT * FROM INTEGRA_FUN
+    SELECT * FROM SANKHYA.INTEGRA_FUN
     WHERE EMAIL IS NOT NULL 
     AND (CONTROLE <> 'SUCESSO' OR CONTROLE IS NULL)
     `
@@ -50,14 +50,15 @@ async function conectaEAtualiza(query) {
   } catch (error) {
     console.log(new Date().toISOString().split('T')[0], "- Erro no update controle")
     console.log(error.message)
-    await geraLog(error.message)
+    await geraLog(error.message, query)
   }
 }
 
-async function geraLog(error){
+async function geraLog(error, query){
   const jsonError = {
     "erro": error,
-    "DataEHora": new Date().toLocaleString()
+    "DataEHora": new Date().toLocaleString(),
+    "query": query
   }
   fs.writeFileSync(`./logs/error-bd-connect.json`, JSON.stringify(jsonError, null, 2))
 }

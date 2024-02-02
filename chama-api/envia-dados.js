@@ -4,10 +4,10 @@ const conexaoDB = require('../conecta-bd/conectabd.js')
 
 async function fazerChamadaApi(requestData) {
 
-  const apiUrl = 'https://api-mca.dialog.qa/v2/ext/mgmt/employees?params=ldpv&integrationType=partial';
+  const apiUrl = 'https://api-mca.dialog.cm/v2/ext/mgmt/employees?params=ldpv&integrationType=partial';
   const headers = {
     'Content-Type': 'application/json',
-    'token': '95dd31679b94d581dd72009de0858a0545db2ab2b67b7532409b27a46233f46b58d8b81b77077f0dabff91520a968c2ac45eb69adfc305cfa545f765c8d6f186b38b03cb6daa24903e17f828a51319be539377116ec814e3504c995f563d7795'
+    'token': 'ffc9eb3d71035d0013768a08ff2a9be091a4f04b1f676d1a685af0c32ff872d60a3c3a05d71a7d28dbbd975c2ac8079c362af210c97890e36ee88636c0c59ad576e0a1cfad6879267745bb0fda319f10e9e938b827b0d1bbe87cfebe4aaaf3d9'
   };
 
   try {
@@ -48,15 +48,18 @@ async function fazerChamadaApi(requestData) {
 }
 
 async function gerarUpdateQuery(funcionarios, resultado) {
+  console.log(`Quantidade de funcionários para fazer update (${resultado}): `, funcionarios.length)
   const queries = funcionarios.map(funcionario => {
     const sql = `
-    UPDATE TFPFUN SET AD_CONTROLE = '${resultado}' WHERE NOMEFUNC = '${funcionario.name}' AND CODFUNC = ${parseInt(funcionario.serial_number)}
+    UPDATE SANKHYA.TFPFUN SET AD_CONTROLE = '${resultado}' WHERE NOMEFUNC = '${funcionario.name}' AND CODFUNC = ${parseInt(funcionario.serial_number)}
     `
     return sql;
   })
 
+  let cont = 1;
   for (const query of queries) {
     await conexaoDB.conectaEAtualiza(query)
+    console.log(`Atualizado ${cont++} de ${funcionarios.length}.`)
   }
 }
 
