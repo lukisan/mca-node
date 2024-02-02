@@ -5,9 +5,11 @@ const service = require('./service')
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+executaJob();
+
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
 
 //função principal do app
 function executaJob() {
@@ -16,4 +18,4 @@ function executaJob() {
 }
 
 //cron job que executa a cada 10 minutos e chama a função principal
-cron.schedule('*/10 * * * *', executaJob);
+// cron.schedule('*/10 * * * *', executaJob);
